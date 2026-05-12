@@ -4,22 +4,24 @@ import Masonry from "react-responsive-masonry";
 
 // Beautiful memories from our time together
 const photos = [
-  { id: 1, src: "/assets/1.jpg", rotation: -2, size: "md" },
-  { id: 2, src: "/assets/2.jpg", rotation: 3, size: "lg" },
-  { id: 3, src: "/assets/3.jpg", rotation: -1, size: "md" },
-  { id: 4, src: "/assets/4.jpg", rotation: 2.5, size: "sm" },
-  { id: 5, src: "/assets/5.jpg", rotation: -3, size: "md" },
-  { id: 6, src: "/assets/6.jpg", rotation: 1.5, size: "lg" },
-  { id: 7, src: "/assets/7.jpg", rotation: -2.5, size: "md" },
-  { id: 8, src: "/assets/8.jpg", rotation: 2, size: "md" },
-  { id: 9, src: "/assets/9.jpg", rotation: -1.5, size: "sm" },
-  { id: 10, src: "/assets/10.jpg", rotation: 3, size: "md" },
-  { id: 11, src: "/assets/11.jpg", rotation: -2.8, size: "lg" },
-  { id: 12, src: "/assets/12.jpg", rotation: 1, size: "md" },
+  { id: 1, src: "/assets/1.jpg", rotation: -2, size: "md", caption: "Sunset" },
+  { id: 2, src: "/assets/2.jpg", rotation: 3, size: "lg", caption: "City" },
+  { id: 3, src: "/assets/3.jpg", rotation: -1, size: "md", caption: "Smile" },
+  { id: 4, src: "/assets/4.jpg", rotation: 2.5, size: "sm", caption: "Picnic" },
+  { id: 5, src: "/assets/5.jpg", rotation: -3, size: "md", caption: "Roadtrip" },
+  { id: 6, src: "/assets/6.jpg", rotation: 1.5, size: "lg", caption: "Morning" },
+  { id: 7, src: "/assets/7.jpg", rotation: -2.5, size: "md", caption: "Silly" },
+  { id: 8, src: "/assets/8.jpg", rotation: 2, size: "md", caption: "Rain" },
+  { id: 9, src: "/assets/9.jpg", rotation: -1.5, size: "sm", caption: "Birthday" },
+  { id: 10, src: "/assets/10.jpg", rotation: 3, size: "md", caption: "Stars" },
+  { id: 11, src: "/assets/11.jpg", rotation: -2.8, size: "lg", caption: "Cafe" },
+  { id: 12, src: "/assets/12.jpg", rotation: 1, size: "md", caption: "Laughs" },
 ];
 
 export function PhotoGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+
+  const currentPhoto = photos.find((p) => p.id === selectedPhoto) ?? null;
 
   const getSizeClass = (size: string) => {
     switch (size) {
@@ -174,7 +176,7 @@ export function PhotoGallery() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  A cherished moment ✨
+                  {currentPhoto?.caption ?? "A cherished moment ✨"}
                 </motion.p>
               </div>
             </div>
