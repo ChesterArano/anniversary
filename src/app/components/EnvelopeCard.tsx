@@ -85,19 +85,19 @@ export function EnvelopeCard({ onOpen }: EnvelopeCardProps) {
                 }
                 transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
               >
-                <div className="text-center px-4">
+                <div className="text-center px-4 mt-10">
                   <p className="text-sm text-gray-600 font-serif italic">
-                     Click the play button in the music below before you Click to open...
+                     Play the music below before you Click to open...
                   </p>
                 </div>
               </motion.div>
 
               {/* Decorative Elements */}
               <div className="absolute top-2 right-2 text-xs text-pink-600 font-serif">
-                To: My Love
+                To: Fiel
               </div>
               <div className="absolute bottom-2 left-2 text-xs text-pink-600 font-serif">
-                From: Your Forever
+                From: Cjay
               </div>
             </div>
 

@@ -4,18 +4,18 @@ import Masonry from "react-responsive-masonry";
 
 // Beautiful memories from our time together
 const photos = [
-  { id: 1, src: "/assets/1.jpg", rotation: -2, size: "md", caption: "Sunset" },
-  { id: 2, src: "/assets/2.jpg", rotation: 3, size: "lg", caption: "City" },
-  { id: 3, src: "/assets/3.jpg", rotation: -1, size: "md", caption: "Smile" },
-  { id: 4, src: "/assets/4.jpg", rotation: 2.5, size: "sm", caption: "Picnic" },
-  { id: 5, src: "/assets/5.jpg", rotation: -3, size: "md", caption: "Roadtrip" },
-  { id: 6, src: "/assets/6.jpg", rotation: 1.5, size: "lg", caption: "Morning" },
-  { id: 7, src: "/assets/7.jpg", rotation: -2.5, size: "md", caption: "Silly" },
-  { id: 8, src: "/assets/8.jpg", rotation: 2, size: "md", caption: "Rain" },
-  { id: 9, src: "/assets/9.jpg", rotation: -1.5, size: "sm", caption: "Birthday" },
-  { id: 10, src: "/assets/10.jpg", rotation: 3, size: "md", caption: "Stars" },
-  { id: 11, src: "/assets/11.jpg", rotation: -2.8, size: "lg", caption: "Cafe" },
-  { id: 12, src: "/assets/12.jpg", rotation: 1, size: "md", caption: "Laughs" },
+  { id: 1, src: "/assets/1.jpg", rotation: -2, size: "md", caption: "First Tulips na binigay ko sayo medyo nagka budget ih AHAHAHA" },
+  { id: 2, src: "/assets/2.jpg", rotation: 3, size: "lg", caption: "Our best picture together. Konti nalang mahal makaka graduate nadin tayo" },
+  { id: 3, src: "/assets/3.jpg", rotation: -1, size: "md", caption: "Biglaang outing napasama ka bigla HAHAHA  Iloveyou always" },
+  { id: 4, src: "/assets/4.jpg", rotation: 2.5, size: "sm", caption: "First Jogging date? drama a HAHAHA" },
+  { id: 5, src: "/assets/5.jpg", rotation: -3, size: "md", caption: "Syempriii Bday ng aking bbgurl naway masaya ka nung araw nayan" },
+  { id: 6, src: "/assets/6.jpg", rotation: 1.5, size: "lg", caption: "Si palaging gusto ay naka talikod, naka pikit o naka nguso pag magpapa pic HAHAH" },
+  { id: 7, src: "/assets/7.jpg", rotation: -2.5, size: "md", caption: "Eto basta dine sa bahay HAHAHAH" },
+  { id: 8, src: "/assets/8.jpg", rotation: 2, size: "md", caption: "First Anniversary natin syempre di mawawala to HAHAHA panahong mapera pa. When kaha ulit?" },
+  { id: 9, src: "/assets/9.jpg", rotation: -1.5, size: "sm", caption: "Outing na namn AHAHAH dami  na memories sa outing ih" },
+  { id: 10, src: "/assets/10.jpg", rotation: 3, size: "md", caption: "Pahinga after a tiring week sa ojt" },
+  { id: 11, src: "/assets/11.jpg", rotation: -2.8, size: "lg", caption: "Church date syempre di mawawala to HAHAHA" },
+  { id: 12, src: "/assets/12.jpg", rotation: 1, size: "md", caption: "Libre mong samgyup hehe. Iloveyou so much mahal" },
 ];
 
 export function PhotoGallery() {
@@ -142,23 +142,14 @@ export function PhotoGallery() {
           onClick={() => setSelectedPhoto(null)}
         >
           <motion.div
-            className="relative max-w-3xl w-full bg-white p-8 rounded-lg shadow-2xl"
+            className="relative w-full max-w-sm"
             initial={{ scale: 0.5, opacity: 0, rotate: -5 }}
             animate={{ scale: 1, opacity: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <motion.button
-              className="absolute top-3 right-3 w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg font-bold text-xl"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setSelectedPhoto(null)}
-            >
-              ✕
-            </motion.button>
-
-            {/* Polaroid Style Lightbox */}
-            <div className="bg-white p-6 rounded-sm shadow-lg">
+            {/* Polaroid Style Card */}
+            <div className="bg-white p-4 md:p-6 shadow-2xl rounded-sm">
               <div className="relative overflow-hidden rounded-sm mb-4 shadow-md">
                 <motion.img
                   src={photos.find((p) => p.id === selectedPhoto)?.src}
@@ -169,9 +160,9 @@ export function PhotoGallery() {
                   transition={{ duration: 0.4 }}
                 />
               </div>
-              <div className="text-center pt-2">
+              <div className="text-center pt-2 pb-2">
                 <motion.p
-                  className="font-serif text-gray-600 text-sm italic"
+                  className="font-serif text-gray-800 text-lg md:text-xl italic font-semibold"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -180,6 +171,17 @@ export function PhotoGallery() {
                 </motion.p>
               </div>
             </div>
+
+            {/* Exit Button */}
+            <motion.button
+              className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg font-bold text-2xl"
+              aria-label="Close photo lightbox"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedPhoto(null)}
+            >
+              ✕
+            </motion.button>
           </motion.div>
         </motion.div>
       )}

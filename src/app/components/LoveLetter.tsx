@@ -50,7 +50,7 @@ Cjay (Aki) ❤️`;
           <div className="text-4xl mb-2">💌</div>
         </motion.div>
 
-        <div className="font-serif text-gray-800 leading-relaxed whitespace-pre-line text-base md:text-lg">
+        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600 }} className="text-gray-800 leading-relaxed whitespace-pre-line text-base md:text-lg">
           {displayedText}
           <motion.span
             animate={{ opacity: [1, 0, 1] }}
