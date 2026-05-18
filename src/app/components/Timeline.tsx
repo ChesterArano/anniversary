@@ -25,7 +25,7 @@ const milestones = [
   {
     date: "February 14, 2026",
     title: "Valentine's Day",
-    description: "Our first Valentine's together",
+    description: "Our 3rd Valentine's together",
     icon: "💝",
     image: "/assets/Valentines day Feb 14  2026.jpg",
   },

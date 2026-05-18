@@ -107,8 +107,18 @@ export function PhotoGallery() {
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: index * 0.05 + 0.3 }}
                   >
-                    <span className="text-xl">✨</span>
-                    <span className="italic">Memory #{photo.id}</span>
+                    <span className="text-xl">💕</span>
+                    <span className="italic">Our Story #{photo.id}</span>
+                  </motion.div>
+
+                  {/* Click Hint */}
+                  <motion.div
+                    className="text-xs text-gray-500 italic mb-2 group-hover:text-pink-500 transition-colors"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: index * 0.05 + 0.35 }}
+                  >
+                    ✨ Click to reveal the story
                   </motion.div>
 
                   {/* Decorative Elements */}
@@ -160,14 +170,24 @@ export function PhotoGallery() {
                   transition={{ duration: 0.4 }}
                 />
               </div>
-              <div className="text-center pt-2 pb-2">
+              <div className="text-center pt-4 pb-2">
                 <motion.p
-                  className="font-serif text-gray-800 text-lg md:text-xl italic font-semibold"
+                  className="font-serif text-gray-700 text-base md:text-lg italic leading-relaxed tracking-wide"
+                  style={{
+                    fontFamily: "'Georgia', 'Garamond', serif",
+                    fontStyle: "italic",
+                    letterSpacing: "0.05em",
+                    lineHeight: "1.8"
+                  }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  {currentPhoto?.caption ?? "A cherished moment ✨"}
+                  <span className="text-pink-500 text-lg">✨ </span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-red-500 to-pink-600">
+                    {currentPhoto?.caption ?? "A cherished moment ✨"}
+                  </span>
+                  <span className="text-pink-500 text-lg"> ✨</span>
                 </motion.p>
               </div>
             </div>
