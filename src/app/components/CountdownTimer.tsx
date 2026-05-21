@@ -64,7 +64,7 @@ export function CountdownTimer() {
           Countdown to Our Anniversary
         </h2>
         <p className="text-lg text-gray-600">
-          Only 10 more days until May 22
+          
         </p>
       </motion.div>
 
