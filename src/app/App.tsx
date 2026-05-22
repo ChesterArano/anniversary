@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { AnimatedBackground } from "./components/AnimatedBackground";
 import { EnvelopeCard } from "./components/EnvelopeCard";
 import { LoveLetter } from "./components/LoveLetter";
@@ -8,10 +8,14 @@ import { Timeline } from "./components/Timeline";
 import { CountdownTimer } from "./components/CountdownTimer";
 import { MusicPlayer } from "./components/MusicPlayer";
 import { FloatingHearts } from "./components/FloatingHearts";
+import { getAnniversaryText } from "./utils/anniversaryCalculator";
 
 export default function App() {
   const [showLetter, setShowLetter] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
+  
+ 
+  const anniversaryText = useMemo(() => getAnniversaryText(), []);
 
   const handleEnvelopeOpen = () => {
     setShowLetter(true);
@@ -55,7 +59,7 @@ export default function App() {
                 backgroundSize: "200% auto",
               }}
             >
-              Happy 3rd Anniversary
+              {anniversaryText}
             </motion.h1>
             <motion.div
               initial={{ scale: 0 }}
