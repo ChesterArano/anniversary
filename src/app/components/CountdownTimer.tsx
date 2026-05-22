@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export function CountdownTimer() {
-  const anniversaryDate = new Date("2026-05-22T00:00:00");
+  const relationshipStartDate = new Date("2023-05-22T00:00:00");
   const [timeData, setTimeData] = useState({
     years: 0,
     months: 0,
@@ -11,32 +11,52 @@ export function CountdownTimer() {
     minutes: 0,
     seconds: 0,
     isAnniversary: false,
+    isMonthsary: false,
   });
 
   useEffect(() => {
     const updateTimer = () => {
       const now = new Date();
-      const diff = Math.abs(anniversaryDate.getTime() - now.getTime());
-      const isAnniversaryDay = anniversaryDate.getTime() <= now.getTime();
+      const start = new Date("2023-05-22T00:00:00");
 
-      const seconds = Math.floor(diff / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const days = Math.floor(hours / 24);
+      // Calculate years, months, days based on calendar dates (not just dividing by days)
+      let years = now.getFullYear() - start.getFullYear();
+      let months = now.getMonth() - start.getMonth();
+      let days = now.getDate() - start.getDate();
 
-      const years = Math.floor(days / 365);
-      const remainingDays = days % 365;
-      const months = Math.floor(remainingDays / 30);
-      const finalDays = remainingDays % 30;
+      // Adjust if days is negative
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      // Adjust if months is negative
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Calculate hours, minutes, seconds from time difference
+      const totalSeconds = Math.floor((now.getTime() - start.getTime()) / 1000);
+      const seconds = totalSeconds % 60;
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const minutes = totalMinutes % 60;
+      const totalHours = Math.floor(totalMinutes / 60);
+      const hours = totalHours % 24;
+
+      const isAnniversaryDay = now.getMonth() === 4 && now.getDate() === 22; // May is month 4 (0-indexed)
+      const isMonthsaryDay = now.getDate() === 22 && !isAnniversaryDay;
 
       setTimeData({
         years,
         months,
-        days: finalDays,
-        hours: hours % 24,
-        minutes: minutes % 60,
-        seconds: seconds % 60,
+        days,
+        hours,
+        minutes,
+        seconds,
         isAnniversary: isAnniversaryDay,
+        isMonthsary: isMonthsaryDay,
       });
     };
 
@@ -64,10 +84,14 @@ export function CountdownTimer() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-4">
-          {timeData.isAnniversary ? "✨ Happy Anniversary ✨" : "Countdown to Our Anniversary"}
+          {timeData.isAnniversary 
+            ? "✨ Happy Anniversary ✨" 
+            : timeData.isMonthsary 
+            ? "💕 Happy Monthsary 💕"
+            : "Our Love Story"}
         </h2>
         <p className="text-lg text-gray-600">
-          {timeData.isAnniversary ? "" : ""}
+          {timeData.isAnniversary ? "We are in 3 years together" : timeData.isMonthsary ? "Another month of love" : "Time together"}
         </p>
       </motion.div>
 
