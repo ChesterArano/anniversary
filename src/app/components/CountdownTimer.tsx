@@ -2,20 +2,22 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export function CountdownTimer() {
-  const targetDate = new Date("2026-05-22T00:00:00");
-  const [timeElapsed, setTimeElapsed] = useState({
+  const anniversaryDate = new Date("2026-05-22T00:00:00");
+  const [timeData, setTimeData] = useState({
     years: 0,
     months: 0,
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
+    isAnniversary: false,
   });
 
   useEffect(() => {
     const updateTimer = () => {
       const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
+      const diff = Math.abs(anniversaryDate.getTime() - now.getTime());
+      const isAnniversaryDay = anniversaryDate.getTime() <= now.getTime();
 
       const seconds = Math.floor(diff / 1000);
       const minutes = Math.floor(seconds / 60);
@@ -27,13 +29,14 @@ export function CountdownTimer() {
       const months = Math.floor(remainingDays / 30);
       const finalDays = remainingDays % 30;
 
-      setTimeElapsed({
+      setTimeData({
         years,
         months,
         days: finalDays,
         hours: hours % 24,
         minutes: minutes % 60,
         seconds: seconds % 60,
+        isAnniversary: isAnniversaryDay,
       });
     };
 
@@ -44,12 +47,12 @@ export function CountdownTimer() {
   }, []);
 
   const timeUnits = [
-    { value: timeElapsed.years, label: "Years", color: "from-pink-500 to-rose-500" },
-    { value: timeElapsed.months, label: "Months", color: "from-purple-500 to-pink-500" },
-    { value: timeElapsed.days, label: "Days", color: "from-blue-500 to-purple-500" },
-    { value: timeElapsed.hours, label: "Hours", color: "from-cyan-500 to-blue-500" },
-    { value: timeElapsed.minutes, label: "Minutes", color: "from-teal-500 to-cyan-500" },
-    { value: timeElapsed.seconds, label: "Seconds", color: "from-emerald-500 to-teal-500" },
+    { value: timeData.years, label: "Years", color: "from-pink-500 to-rose-500" },
+    { value: timeData.months, label: "Months", color: "from-purple-500 to-pink-500" },
+    { value: timeData.days, label: "Days", color: "from-blue-500 to-purple-500" },
+    { value: timeData.hours, label: "Hours", color: "from-cyan-500 to-blue-500" },
+    { value: timeData.minutes, label: "Minutes", color: "from-teal-500 to-cyan-500" },
+    { value: timeData.seconds, label: "Seconds", color: "from-emerald-500 to-teal-500" },
   ];
 
   return (
@@ -61,10 +64,10 @@ export function CountdownTimer() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-4">
-          Countdown to Our Anniversary
+          {timeData.isAnniversary ? "✨ Happy Anniversary ✨" : "Countdown to Our Anniversary"}
         </h2>
         <p className="text-lg text-gray-600">
-          
+          {timeData.isAnniversary ? "" : ""}
         </p>
       </motion.div>
 
@@ -115,6 +118,23 @@ export function CountdownTimer() {
           </motion.div>
         ))}
       </div>
+
+      {/* Romantic Message for Anniversary */}
+      {timeData.isAnniversary && (
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          <div className="text-2xl md:text-3xl font-serif text-rose-600 mb-4">
+            Forever with you ❤️
+          </div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Every moment with you is a treasure. Happy Anniversary! Here's to many more years of love, laughter, and beautiful memories together.
+          </p>
+        </motion.div>
+      )}
     </div>
   );
 }
